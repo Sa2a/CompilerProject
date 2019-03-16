@@ -1,41 +1,41 @@
+import com.sun.xml.internal.bind.v2.runtime.reflect.opt.Const;
+
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
-import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Main {
 
     public static void main(String[] args) {
-        Token ID = new Token("ID", "[a-zA-Z_]\\w*");
-        Token INTEGRAL_LITERAL = new Token("INTEGRAL_LITERAL", "[-+]?\\d+");
-        Token FLOAT_LITERAL = new Token("FLOAT_LITERAL", "[-+]?[0-9]*\\.?[0-9]+");
-        Token STRING_LITERAL = new Token("STRING_LITERAL", "\".*\"");
-        Token CHAR_LITERAL = new Token("CHAR_LITERAL", "\'.?\'");
-        Token MULTI_COMMENT = new Token("MULTI_COMMENT", "/\\*.*\\*/");
-        Token SINGLE_COMMENT = new Token("SINGLE_COMMENT", "//.*\n");
 
-        GroupToken identifier = new GroupToken("identifier", ID.getRegEx());
-        identifier.readTokensFile("E:\\1_College\\y4_T2\\Compilers\\project\\src\\tokens\\identifier.txt");
+        final String ID = "[a-zA-Z_]\\w*";
+        final String INTEGRAL_LITERAL = "\\d+";
+        final String FLOAT_LITERAL = "[0-9]*\\.?[0-9]+";
+        final String STRING_LITERAL = "\".*\"";
+        final String CHAR_LITERAL = "\'.?\'";
+        final String MULTI_COMMENT = "/\\*.*\\*/";
+        final String SINGLE_COMMENT = "//.*\n";
+        final String SPECIAL_SYMBOLS = "=>|=<|==|!=|&&|\\|\\||>>|<<|\\p{Punct}";
 
-        GroupToken constant = new GroupToken("constant", INTEGRAL_LITERAL.getRegEx() + '|' + FLOAT_LITERAL.getRegEx());
-        constant.addToken(INTEGRAL_LITERAL);
-        constant.addToken(FLOAT_LITERAL);
 
-        GroupToken strings = new GroupToken("strings", STRING_LITERAL.getRegEx() + '|' + CHAR_LITERAL.getRegEx() + '|' +
-                MULTI_COMMENT.getRegEx() + '|' + SINGLE_COMMENT.getRegEx());
-        strings.readTokensFile("E:\\1_College\\y4_T2\\Compilers\\project\\src\\tokens\\strings.txt");
+        GroupToken groupToken[] =  new GroupToken[4];
+        // keywords and identifiers
+        groupToken[0] = new GroupToken("identifier", ID);
+        // constants
+        groupToken[1] = new GroupToken("constant", INTEGRAL_LITERAL + '|' + FLOAT_LITERAL);
+        // strings
+        groupToken[2] = new GroupToken("strings", STRING_LITERAL + '|' + CHAR_LITERAL + '|' + MULTI_COMMENT + '|' + SINGLE_COMMENT);
+        // specialSymbols & Operators
+        groupToken[3] = new GroupToken("specialSymbol", SPECIAL_SYMBOLS);
 
-        GroupToken specialSymbol = new GroupToken("specialSymbol", "=>|=<|==|!=|&&|\\|\\||>>|<<|\\p{Punct}");
-        specialSymbol.readTokensFile("E:\\1_College\\y4_T2\\Compilers\\project\\src\\tokens\\specialSymbol.txt");
-
-        String regEx = identifier.getRegEx() + '|' + constant.getRegEx() + '|' + strings.getRegEx()+'|'+specialSymbol.getRegEx();
+        String regEx = groupToken[0].getRegEx() + '|' + groupToken[1].getRegEx() + '|' + groupToken[2].getRegEx()+'|'+groupToken[3].getRegEx();
         Pattern pattern = Pattern.compile(regEx,Pattern.MULTILINE);
         String contents = null;
         try {
-            contents = new String(Files.readAllBytes(Paths.get("E:\\1_College\\y4_T2\\Compilers\\project\\src\\input.txt")));
+            contents = new String(Files.readAllBytes(Paths.get("src\\input.txt"))).replaceAll("\\r\\n", "\n");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -43,33 +43,21 @@ public class Main {
         String output = "";
         while (matcher.find()) {
             String mached = matcher.group();
-            if(identifier.matchCheck(mached))
+            for(int i=0;i<groupToken.length;i++)
             {
-                Token t = identifier.findToken(mached);
-                output +=('<'+t.getName()+">: "+mached)+"\n";
-            }
-            else if(constant.matchCheck(mached))
-            {
-                Token t = constant.findToken(mached);
-                output +=('<'+t.getName()+">: "+mached)+"\n";
-            }
-            else if(strings.matchCheck(mached))
-            {
-                Token t = strings.findToken(mached);
-                output +=('<'+t.getName()+">: "+mached)+"\n";
-            }
-            else if(specialSymbol.matchCheck(mached)) {
-                Token t = specialSymbol.findToken(mached);
-                output += ('<' + t.getName() + ">: " + mached) + "\n";
+                if(groupToken[i].matchCheck(mached))
+                {
+                    Token t = groupToken[i].findToken(mached);
+                    output +=('<'+t.getName()+">: "+mached)+"\n";
+                    break;
+                }
             }
         }
 
         try {
             System.out.println(output);
-            String path = "E:\\1_College\\y4_T2\\Compilers\\project\\src\\output.txt";
+            String path = "src\\output.txt";
             Files.write( Paths.get(path), output.getBytes(), StandardOpenOption.CREATE);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
