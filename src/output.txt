@@ -14,8 +14,6 @@
 <NOT>: !
 <RIGHT_ROUND_B>: (
 <ID>: x
-<OR>: ||
-<EQUAL>: ==
 <RIGHT_ROUND_B>: (
 <ID>: x
 <MINUS>: -
@@ -25,17 +23,3 @@
 <LEFT_ROUND_B>: )
 <SEMICOLON>: ;
 <LEFT_CURLY_B>: }
->: ;
-<LEFT_CURLY_B>: }
-EGRAL_LITERAL>: 1
-<LEFT_ROUND_B>: )
-<LEFT_ROUND_B>: )
-<LEFT_ROUND_B>: )
-<SEMICOLON>: ;
-<LEFT_CURLY_B>: }
-_ROUND_B>: )
-<LEFT_ROUND_B>: )
-<SEMICOLON>: ;
-<COMMA>: ,
-<LEFT_CURLY_B>: }
-<LEFT_SQUARE_B>: ]

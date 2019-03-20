@@ -35,4 +35,4 @@ UNSIGNED unsigned
 VOID void
 VOLATILE volatile
 WHILE while
-ID [a-zA-Z_]\w*
+ID \b[a-zA-Z_]\w*\b
