@@ -1,0 +1,40 @@
+<BOOL>: bool
+<ID>: isPowerOfTwo
+<RIGHT_ROUND_B>: (
+<INT>: int
+<ID>: x
+<LEFT_ROUND_B>: )
+<RIGHT_CURLY_B>: {
+<SINGLE_COMMENT>: // First x in the @below expression is
+<SINGLE_COMMENT>: // for the case when x is 0
+<RETURN>: return
+<ID>: x
+<AND>: &&
+<RIGHT_ROUND_B>: (
+<NOT>: !
+<RIGHT_ROUND_B>: (
+<ID>: x
+<BITWISE_AND>: &
+error no token = ?
+ID>: x
+<MINUS>: -
+<INTEGRAL_LITERAL>: 1
+<LEFT_ROUND_B>: )
+<LEFT_ROUND_B>: )
+<LEFT_ROUND_B>: )
+<SEMICOLON>: ;
+<LEFT_CURLY_B>: }
+COLON>: ;
+<LEFT_CURLY_B>: }
+EGRAL_LITERAL>: 1
+<LEFT_ROUND_B>: )
+<LEFT_ROUND_B>: )
+<LEFT_ROUND_B>: )
+<SEMICOLON>: ;
+<LEFT_CURLY_B>: }
+_ROUND_B>: )
+<LEFT_ROUND_B>: )
+<SEMICOLON>: ;
+<COMMA>: ,
+<LEFT_CURLY_B>: }
+<LEFT_SQUARE_B>: ]

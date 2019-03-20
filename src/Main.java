@@ -11,17 +11,16 @@ public class Main {
 
     public static void main(String[] args) {
 
-        final String ID = "[a-zA-Z_]\\w*";
-        final String INTEGRAL_LITERAL = "\\d+";
-        final String FLOAT_LITERAL = "[0-9]*\\.?[0-9]+";
+        final String ID = "\\b[a-zA-Z_]\\w*\\b";
+        final String INTEGRAL_LITERAL = "\\b\\d+\\b";
+        final String FLOAT_LITERAL = "\\b[0-9]*\\.?[0-9]+\\b";
         final String STRING_LITERAL = "\".*\"";
         final String CHAR_LITERAL = "\'.?\'";
         final String MULTI_COMMENT = "/\\*.*\\*/";
-        final String SINGLE_COMMENT = "//.*\n";
-        final String SPECIAL_SYMBOLS = "=>|=<|==|!=|&&|\\|\\||>>|<<|\\p{Punct}";
-
-
-        GroupToken groupToken[] =  new GroupToken[4];
+        final String SINGLE_COMMENT = "//.*$";
+        final String SPECIAL_SYMBOLS = "=>|=<|!=|[=<>&\\|]{2}|[\\p{Punct}&&[^\"\\$':\\?@_`]]";
+        //"[=<>&\\|]{2}
+        GroupToken groupToken[] = new GroupToken[4];
         // keywords and identifiers
         groupToken[0] = new GroupToken("identifier", ID);
         // constants
@@ -31,8 +30,8 @@ public class Main {
         // specialSymbols & Operators
         groupToken[3] = new GroupToken("specialSymbol", SPECIAL_SYMBOLS);
 
-        String regEx = groupToken[0].getRegEx() + '|' + groupToken[1].getRegEx() + '|' + groupToken[2].getRegEx()+'|'+groupToken[3].getRegEx();
-        Pattern pattern = Pattern.compile(regEx,Pattern.MULTILINE);
+        String regEx = "\\s|" + groupToken[0].getRegEx() + '|' + groupToken[1].getRegEx() + '|' + groupToken[2].getRegEx() + '|' + groupToken[3].getRegEx();
+        Pattern pattern = Pattern.compile(regEx, Pattern.MULTILINE);
         String contents = null;
         try {
             contents = new String(Files.readAllBytes(Paths.get("src\\input.txt"))).replaceAll("\\r\\n", "\n");
@@ -41,23 +40,29 @@ public class Main {
         }
         Matcher matcher = pattern.matcher(contents);
         String output = "";
+
+        int start = 0, prevEnd = 0;
         while (matcher.find()) {
             String mached = matcher.group();
-            for(int i=0;i<groupToken.length;i++)
-            {
-                if(groupToken[i].matchCheck(mached))
-                {
+            start = matcher.start();
+            if (start != prevEnd) {
+                output +=("error no token = " + contents.substring(prevEnd, start)+'\n');
+                break;
+            }
+            for (int i = 0; i < groupToken.length; i++) {
+                if (groupToken[i].matchCheck(mached)) {
                     Token t = groupToken[i].findToken(mached);
-                    output +=('<'+t.getName()+">: "+mached)+"\n";
+                    output += ('<' + t.getName() + ">: " + mached) + "\n";
                     break;
                 }
             }
+            prevEnd = matcher.end();
         }
 
         try {
             System.out.println(output);
             String path = "src\\output.txt";
-            Files.write( Paths.get(path), output.getBytes(), StandardOpenOption.CREATE);
+            Files.write(Paths.get(path), output.getBytes(), StandardOpenOption.CREATE);
         } catch (IOException e) {
             e.printStackTrace();
         }
