@@ -1,6 +1,12 @@
 bool isPowerOfTwo(int x)
 {
-// First x in the @below expression is
-// for the case when x is 0
+"hello ***** \n world";
+/******* First *x in the @below expression is
+*1
+*2
+*3
+*4
+for the case when *x is 0 ************/
 return x && (!(x  (x - 1)));
+//this end of *program
 }

@@ -16,11 +16,11 @@ public class Main {
         final String FLOAT_LITERAL = "\\b[0-9]*\\.?[0-9]+\\b";
         final String STRING_LITERAL = "\".*\"";
         final String CHAR_LITERAL = "\'.?\'";
-        final String MULTI_COMMENT = "/\\*.*\\*/";
+        final String MULTI_COMMENT = "/\\*([^*]|\\*+[^/])*\\*+/";
         final String SINGLE_COMMENT = "//.*$";
         final String SPECIAL_SYMBOLS = "=>|=<|!=|[=<>&\\|]{2}|[\\p{Punct}&&[^\"\\$':\\?@_`]]";
         //"[=<>&\\|]{2}
-        GroupToken groupToken[] = new GroupToken[4];
+        GroupToken[] groupToken = new GroupToken[4];
         // keywords and identifiers
         groupToken[0] = new GroupToken("identifier", ID);
         // constants
@@ -49,9 +49,9 @@ public class Main {
                 output +=("error no token = " + contents.substring(prevEnd, start)+'\n');
                 break;
             }
-            for (int i = 0; i < groupToken.length; i++) {
-                if (groupToken[i].matchCheck(mached)) {
-                    Token t = groupToken[i].findToken(mached);
+            for (GroupToken groupToken1 : groupToken) {
+                if (groupToken1.matchCheck(mached)) {
+                    Token t = groupToken1.findToken(mached);
                     output += ('<' + t.getName() + ">: " + mached) + "\n";
                     break;
                 }

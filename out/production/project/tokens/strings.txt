@@ -1,4 +1,4 @@
 STRING_LITERAL ".*"
 CHAR_LITERAL '.?'
-MULTI_COMMENT /\*.*\*/
+MULTI_COMMENT /\*([^*]|\*+[^/])*\*+/
 SINGLE_COMMENT //.*$
