@@ -1,0 +1,2 @@
+FLOAT_LITERAL \b\d+\.\d+\b
+INTEGRAL_LITERAL \b\d+\b

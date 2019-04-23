@@ -1,3 +1,5 @@
+package Lexical_Analysis;
+
 import java.io.*;
 import java.util.ArrayList;
 
@@ -19,7 +21,7 @@ public class GroupToken extends IToken{
 
     private void readTokensFile(String fileName) {
         String line = null;
-        fileName = "src\\tokens\\"+fileName+".txt";
+        fileName = "src\\Lexical_Analysis\\tokens\\"+fileName+".txt";
         try {
             BufferedReader bufferedReader = new BufferedReader(new FileReader(new File(fileName)));
             String[] token;

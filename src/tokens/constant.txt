@@ -1,2 +1,0 @@
-INTEGRAL_LITERAL \b\d+\b
-FLOAT_LITERAL \b[0-9]*\.?[0-9]+\b

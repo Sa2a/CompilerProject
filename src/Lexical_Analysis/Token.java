@@ -1,5 +1,4 @@
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+package Lexical_Analysis;
 
 public class Token extends IToken{
 
