@@ -16,7 +16,7 @@ public class Lexical_Analyzer {
     private final String CHAR_LITERAL = "\'.?\'";
     private final String MULTI_COMMENT = "/\\*([^*]|\\*+[^/])*\\*+/";
     private final String SINGLE_COMMENT = "//.*$";
-    private final String SPECIAL_SYMBOLS = "=>|=<|!=|[=<>&\\|]{2}|[\\p{Punct}&&[^\"\\$':\\?@_`]]";
+    private final String SPECIAL_SYMBOLS = ">=|<=|!=|[=<>&\\|]{2}|[\\p{Punct}&&[^\"\\$':\\?@_`]]";
     //"[=<>&\\|]{2}
     private GroupToken[] groupToken;
     // keywords and identifiers

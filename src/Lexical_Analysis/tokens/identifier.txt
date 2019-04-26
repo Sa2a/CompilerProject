@@ -35,4 +35,5 @@ UNSIGNED unsigned
 VOID void
 VOLATILE volatile
 WHILE while
+SIZE size
 ID \b[a-zA-Z_]\w*\b
