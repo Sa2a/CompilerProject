@@ -2,3 +2,8 @@
 .idea/vcs.xml
 *.xml
 *.class
+.idea/workspace.xml
+out/production/project/input.txt
+out/production/project/output.txt
+src/Main.java
+src/output.txt
