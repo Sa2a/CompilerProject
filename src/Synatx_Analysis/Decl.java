@@ -1,6 +1,6 @@
 package Synatx_Analysis;
 
-public class Decl implements Node{
+public class Decl extends Node{
 
     @Override
     public void printNode() {

@@ -1,9 +1,9 @@
 package Synatx_Analysis;
 
-public class Program implements Node{
-    private Decl_List decl_list;
+public class Program extends Node{
+    private Node decl_list;
 
-    public Program(Decl_List decl_list) {
+    public Program(Node decl_list) {
         this.decl_list = decl_list;
     }
 

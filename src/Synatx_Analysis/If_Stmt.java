@@ -26,6 +26,7 @@ public class If_Stmt extends Node {
         printToken(openBrace, "(");
         expr00.printNode();
         printToken(closeBrace, ")");
+        stmt.printNode();
         else_stmt.printNode();
         System.out.println("--------------If_Stmt-End-----------");
 

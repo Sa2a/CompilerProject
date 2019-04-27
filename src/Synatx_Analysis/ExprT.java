@@ -1,6 +1,6 @@
 package Synatx_Analysis;
 
-public class ExprT implements Node {
+public class ExprT extends Node {
     private String name;
     private Token token1;
 
@@ -16,13 +16,4 @@ public class ExprT implements Node {
         System.out.println("----------------"+ name +"-End--------------");
     }
 
-    private void printToken(Token token,String expectedValue) {
-        if(token == null) {
-            System.out.println("Syntax Error Expected "+expectedValue);
-            System.exit(0);
-        }
-        else {
-            System.out.println(token.getName());
-        }
-    }
 }

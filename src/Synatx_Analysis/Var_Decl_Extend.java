@@ -1,6 +1,6 @@
 package Synatx_Analysis;
 
-public class Var_Decl_Extend implements Node{
+public class Var_Decl_Extend extends Node{
     private Token token1;
     private Token token2;
 
@@ -25,15 +25,5 @@ public class Var_Decl_Extend implements Node{
             printToken(token2,"]");
         }
         System.out.println("--------------Var Decl Extend End----");
-    }
-
-    private void printToken(Token token,String expectedValue) {
-        if(token == null) {
-            System.out.println("Syntax Error Expected "+expectedValue);
-            System.exit(0);
-        }
-        else {
-            System.out.println(token.getName());
-        }
     }
 }

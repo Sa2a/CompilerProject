@@ -1,6 +1,6 @@
 package Synatx_Analysis;
 
-public class Empty implements Node{
+public class Empty extends Node{
     public Empty(){
 
     }

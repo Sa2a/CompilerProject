@@ -1,6 +1,6 @@
 package Synatx_Analysis;
 
-public class ExprTNN implements Node {
+public class ExprTNN extends Node {
     private String name;
     private Token token;
     private Node expr1;
@@ -31,13 +31,4 @@ public class ExprTNN implements Node {
         }
     }
 
-    private void printToken(Token token,String expectedValue) {
-        if(token == null) {
-            System.out.println("Syntax Error Expected "+expectedValue);
-            System.exit(0);
-        }
-        else {
-            System.out.println(token.getName());
-        }
-    }
 }

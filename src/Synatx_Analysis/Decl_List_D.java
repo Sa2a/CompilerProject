@@ -1,6 +1,6 @@
 package Synatx_Analysis;
 
-public class Decl_List_D implements Node{
+public class Decl_List_D extends Node{
 
     private Node decl;
     private Decl_List_D declListD;

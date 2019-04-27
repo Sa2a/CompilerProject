@@ -1,25 +1,23 @@
 package Synatx_Analysis;
 
-public class ExprTNT extends Node {
+public class NodeNT extends Node{
     private String name;
-    private Token token1;
     private Node expr;
-    private Token token2;
+    private Token token;
 
-    public ExprTNT(String name,Token token1, Node expr, Token token2) {
+
+    public NodeNT(String name, Node expr, Token token) {
         this.name = name;
-        this.token1 = token1;
+        this.token = token;
         this.expr = expr;
-        this.token2 = token2;
     }
 
     @Override
     public void printNode() {
         try{
             System.out.println("----------------"+ name +"---------------");
-            printToken(token1,"");
             expr.printNode();
-            printToken(token2,"");
+            printToken(token,"");
             System.out.println("----------------"+ name +"-End-----------");
         }catch (Exception e)
         {

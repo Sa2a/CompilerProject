@@ -1,6 +1,6 @@
 package Synatx_Analysis;
 
-public class Var_Decl implements Node{
+public class Var_Decl extends Node{
     private Type_Spec type_spec;
     private Token ident;
     private Var_Decl_Extend extend;
@@ -21,16 +21,6 @@ public class Var_Decl implements Node{
         extend.printNode();
         printToken(semicolon,";");
         System.out.println("--------------Var Decl-End-----------");
-    }
-
-    private void printToken(Token token,String expectedValue) {
-        if(token == null) {
-            System.out.println("Syntax Error Expected "+expectedValue);
-            System.exit(0);
-        }
-        else {
-            System.out.println(token.getName());
-        }
     }
 
 }

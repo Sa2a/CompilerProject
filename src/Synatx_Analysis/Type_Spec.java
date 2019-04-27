@@ -1,6 +1,6 @@
 package Synatx_Analysis;
 
-public class Type_Spec implements Node {
+public class Type_Spec extends Node {
 
     private Token token;
 

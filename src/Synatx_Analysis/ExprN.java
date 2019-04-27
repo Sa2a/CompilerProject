@@ -1,6 +1,6 @@
 package Synatx_Analysis;
 
-public class ExprN implements Node{
+public class ExprN extends Node{
     private String name;
     private Node node;
 
