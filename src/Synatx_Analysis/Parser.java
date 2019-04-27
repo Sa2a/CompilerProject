@@ -150,13 +150,9 @@ public class Parser {
     }
 
     private Node stmt_list(){
-        return new ExprN("stmt_list", stmt_list_d());
-    }
-
-    private Node stmt_list_d(){
         Node stmt = stmt();
         if(stmt != null){
-            return new ExprNN("stmt_list_d", stmt, stmt_list_d());
+            return new ExprNN("stmt_list_d", stmt, stmt_list());
         }
         return new Empty();
     }
