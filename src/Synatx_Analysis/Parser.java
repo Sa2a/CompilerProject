@@ -71,8 +71,10 @@ public class Parser {
             Token token1 = tokenQueue.poll();
             Token token2 = tokenQueue.peek();
             if(token2!=null && token2.getName().equals("<LEFT_SQUARE_B>")){
+                token2 = tokenQueue.poll();
                 Token token3 = tokenQueue.peek();
                 if(token3!=null && token3.getName().equals("<SEMICOLON>")){
+                    token3 = tokenQueue.poll();
                     return new ExprTTT("var_decl", token1, token2, token3);
                 }
             }
@@ -519,6 +521,5 @@ public class Parser {
             return new Empty();
         }
     }
-
 
 }
